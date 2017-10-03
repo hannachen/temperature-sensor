@@ -1,9 +1,7 @@
 PIN=4 --data pin, GPIO2
 
-config = require("config")
-SSID=config.getSSID()
-PASS=config.getPASS()
-IP=config.getIP()
+-- Load global user-defined variables
+dofile("config.lua")
 
 timer=tmr.create()
 timeout=false
@@ -11,7 +9,7 @@ cache = ""
 
 wifi.setmode(wifi.STATION)
 wifi.sta.config(SSID,PASS)
-wifi.sta.setip({ip=IP,netmask="255.255.255.0",gateway=config.getGATEWAY()})
+wifi.sta.setip({ip=IP,netmask="255.255.255.0",gateway=GATEWAY})
 srv=net.createServer(net.TCP, 30)
 srv:listen(80,function(conn)
     conn:on("receive", function(client)

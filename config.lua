@@ -1,26 +1,15 @@
-local moduleName = ...
-local M = {}
-_G[moduleName] = M
+--wifi module
+SSID="XXX"
+PASS="XXX"
+IP="0.0.0.0"
+GATEWAY="0.0.0.0"
 
-local SSID="XXX"
-local PASS="XXX"
-local IP="0.0.0.0"
-local GATEWAY="0.0.0.0"
+--hardware identifier
+ID="XXX"
+KEY="XXX"
 
-function M.getSSID()
-    return SSID
-end
+--sensor reading interval
+SLEEP_TIME = 60000 --sleep time in microseconds(μs)
 
-function M.getPASS()
-    return PASS
-end
-
-function M.getIP()
-    return IP
-end
-
-function M.getGATEWAY()
-    return GATEWAY
-end
-
-return M
+-- Status Message
+print("Global variables loaded")
