@@ -4,6 +4,9 @@ PASS="XXX"
 IP="0.0.0.0"
 GATEWAY="0.0.0.0"
 
+--api
+API="io.devchipmunk.com/temp"
+
 --hardware identifier
 ID="XXX"
 KEY="XXX"
