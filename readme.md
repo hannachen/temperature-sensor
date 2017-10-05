@@ -21,6 +21,9 @@
   - [Driver (ch340)](http://sparks.gogo.co.nz/ch340.html)
 - Custom development board
 
+## Wiring
+![Wiring](images/esp8266-dht22_bb.png)
+
 ## References
 - [Adafruit ESP8266 Temperature / Humidity Webserver Tutorial](https://learn.adafruit.com/esp8266-temperature-slash-humidity-webserver)
 - [Wiring the ESP8266 As Stand Alone](http://www.14core.com/wiring-the-esp8266-as-stand-alone/)
