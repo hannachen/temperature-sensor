@@ -3,10 +3,6 @@ PIN=4 --data pin, GPIO2
 -- Load global user-defined variables
 dofile("config.lua")
 
-timer=tmr.create()
-timeout=false
-cache = ""
-
 wifi.setmode(wifi.STATION)
 wifi.sta.config(SSID,PASS)
 wifi.sta.setip({ip=IP,netmask="255.255.255.0",gateway=GATEWAY})
@@ -23,8 +19,10 @@ function readDht()
         sendData(temp,humi)
     elseif(dht_status == dht.ERROR_CHECKSUM) then
         print("DHT Checksum error")
+        connectWifi()
     elseif(dht_status == dht.ERROR_TIMEOUT) then
         print("DHT Time out")
+        connectWifi()
     end
 end
 
@@ -44,46 +42,33 @@ function sendData(temp,humi)
         'Content-Type: application/x-www-form-urlencoded\r\n',
         body,
         function(code, data)
+            local timeout=500
             if (code < 0) then
                 print("HTTP request failed")
             else
                 print(code, data)
+                if (code == 200 and data == "OK") then
+                    timeout=SLEEP_TIME
+                    print("disconnected, timeout for "..(SLEEP_TIME/1000).." seconds")
+                end
             end
+            tmr.alarm(1,timeout,tmr.ALARM_SINGLE,function() connectWifi() end)
         end)
+end
 
-    --[=====[
-        conn=net.createConnection(net.TCP, 0)
-        conn:on("receive", function(conn, payload) print(payload) end)
-        conn:connect(80,API)
-        conn:send(header)
-        conn:send("\r\n")
-        conn:send(body)
-        conn:on("sent",function(conn)
-            conn:close()
-            print("Connection closed")
-        end)
-        conn:on("disconnection", function(conn)
-            tmr.alarm(1,SLEEP_TIME,tmr.ALARM_SINGLE,function() connectWifi() end)
-            print("disconnected, sleeping for "..(SLEEP_TIME/1000).." seconds")
-        end)
-    --]=====]
+-- Execute sensor reading
+function execLoop()
+    if wifi.sta.status() == 5 then  --STA_GOTIP
+        print("Connected to "..wifi.sta.getip())
+        tmr.stop(1) --Exit loop
+        readDht() --Retrieve sensor data
+    else
+        print("Connecting...")
     end
+end
 
-    -- Execute sensor reading and enter deep sleep
-    function func_exec_loop()
-        if wifi.sta.status() == 5 then  --STA_GOTIP
-            print("Connected to "..wifi.sta.getip())
-            tmr.stop(1) --Exit loop
-            readDht() --Retrieve sensor data
-            --print("Going into deep sleep mode for "..(SLEEP_TIME/1000).." seconds.")
-            --node.sleep(SLEEP_TIME*1000)
-        else
-            print("Connecting...")
-        end
-    end
+function connectWifi()
+    tmr.alarm(1,500,tmr.ALARM_AUTO,function() execLoop() end)
+end
 
-    function connectWifi()
-        tmr.alarm(1,500,tmr.ALARM_AUTO,function() func_exec_loop() end)
-    end
-
-    connectWifi()
+connectWifi()
