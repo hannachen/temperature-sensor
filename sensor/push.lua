@@ -30,19 +30,14 @@ function sendData(temp,humi)
     print("Sending data...")
 
     local body="id="..ID.."&t="..temp.."&h="..humi
-    local header="POST / HTTP/1.1\r\n"
-                .."Host: "..IP.."\r\n"
-                .."Content-Type: application/x-www-form-urlencoded\r\n"
-                .."Content-length: "..#body.."\r\n"
-                .."Accept: */*\r\n"
-                .."User-Agent: Mozilla/4.0 (compatible; esp8266 Lua; Windows NT 5.1)\r\n"
-                .."x-api-key: "..KEY
+    local header="Content-Type: application/x-www-form-urlencoded\r\n"
+                .."x-api-key: "..KEY.."\r\n"
 
     http.post('http://'..API,
-        'Content-Type: application/x-www-form-urlencoded\r\n',
+        header,
         body,
         function(code, data)
-            local timeout=500
+            local timeout=5000 --default timeout 5 seconds before trying
             if (code < 0) then
                 print("HTTP request failed")
             else
@@ -58,7 +53,7 @@ end
 
 -- Execute sensor reading
 function execLoop()
-    if wifi.sta.status() == 5 then  --STA_GOTIP
+    if wifi.sta.status() == 5 then --STA_GOTIP
         print("Connected to "..wifi.sta.getip())
         tmr.stop(1) --Exit loop
         readDht() --Retrieve sensor data

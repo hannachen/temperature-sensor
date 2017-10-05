@@ -1,8 +1,11 @@
 <?
-// Check for required POST data before continuing
+// Check for required header and POST data before continuing
+$headerApiKey = $_SERVER['HTTP_X_API_KEY'];
+
 if (empty($_POST['id']) ||
     empty($_POST['t']) ||
-    empty($_POST['h'])) {
+    empty($_POST['h']) ||
+    $headerApiKey !== 'bfA6rW7rZRp1o6gA') {
   die();
 }
 
