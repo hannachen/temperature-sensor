@@ -42,7 +42,7 @@ srv:listen(80,function(conn)
                 timer:unregister()
                 body=body.." { error: \"DHT timed out.\" }"
             end
-            
+
         end
         local header="HTTP/1.1 200 OK\r\n"
                 .."Connection: keep-alive\r\n"
