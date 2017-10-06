@@ -1,12 +1,12 @@
 # Wifi temperature sensor with ESP-01 and DHT22
 
 ## Setup
-- Create a custom build of [NodeMCU 1.5.4.1-final](https://nodemcu-build.com/), with modules: **DHT, file, GPIO, HTTP, net, node, timer, UART, WiFi**
-- On the ESP-01, wire GPIO0 to GROUND together to enable **flash mode**
-- Use [esptool](https://github.com/espressif/esptool) to flash the wifi module with the custom firmware (float version)
+- On the ESP-01, use a jumper wire to connect **GPIO0** and **GND** to enable **flash mode**
+- Create a custom build of [NodeMCU 1.5.4.1-final](https://nodemcu-build.com/), with the following modules: **DHT, file, GPIO, HTTP, net, node, timer, UART, WiFi**
+- Flash the ESP-01 wifi module with custom built firmware (float version) using [esptool](https://github.com/espressif/esptool)
 - Download ESP8266 / NodeMCU / MicroPhython IDE [ESPlorer](https://github.com/4refr0nt/ESPlorer)
-- In **ESPlorer**, switch to **NodeMCU/MicroPython** tab
-- Change settings in `config.lua`
+- Open **ESPlorer**, switch to **NodeMCU+MicroPython** tab
+- Open and change settings in `config.lua`
 - Rename `pull.lua` or `push.lua` to `init.lua`
 - Upload `config.lua` and `init.lua` to the wifi module by clicking on **Save to ESP**
 
@@ -26,11 +26,13 @@
 
 ## References
 - [Adafruit ESP8266 Temperature / Humidity Webserver Tutorial](https://learn.adafruit.com/esp8266-temperature-slash-humidity-webserver)
+- [Capturing Sensor Data: DHT22](http://tiestvangool.ghost.io/2016/09/04/capturing-sensor-data-dht22/)
 - [Wiring the ESP8266 As Stand Alone](http://www.14core.com/wiring-the-esp8266-as-stand-alone/)
 - ESP8266 [Wikipedia](https://en.wikipedia.org/wiki/ESP8266) | [ESP8266 Community - Module Family](http://www.esp8266.com/wiki/doku.php?id=esp8266-module-family)
 
 ### Documentation
 - [NodeMCU Documentation](https://nodemcu.readthedocs.io/en/dev/)
+- [ESP8266 Arduino Core Documentation](http://arduino-esp8266.readthedocs.io/en/latest/)
 
 ### Datasheet
 - [ESP-01 WiFi Module](http://ecksteinimg.de/Datasheet/Ai-thinker%20ESP-01%20EN.pdf)
@@ -38,3 +40,4 @@
 
 ## Further reading
 - [Hack to enable deep sleep mode on the ESP-01](https://hackaday.com/2015/02/08/hack-allows-esp-01-to-go-to-deep-sleep/)
+- [My odyssey across the trails of technology](http://tiestvangool.ghost.io/)
