@@ -1,4 +1,5 @@
 # Wifi temperature sensor with ESP-01 and DHT22
+![First iteration with enclosure](images/complete.jpg)
 
 ## Setup
 - On the ESP-01, use a jumper wire to connect **GPIO0** and **GND** to enable **flash mode**
@@ -19,7 +20,7 @@
 ### Development
 - [USB to ESP8266 Serial Wireless Wi-Fi Module](http://www.icstation.com/wifi-module-esp8266-pinboard-cellphonepc-wireless-communication-p-8857.html)
   - [Driver (ch340)](http://sparks.gogo.co.nz/ch340.html)
-- Custom development board
+- Custom development board  ![Badly soldered development board](images/development-board-bad-soldering.jpg)  Badly soldered example above...
 
 ## Wiring
 ![Wiring](images/esp8266-dht22_bb.png)
