@@ -1,5 +1,7 @@
 PIN=4 --data pin, GPIO2
 
+counter=0
+
 -- Load global user-defined variables
 dofile("config.lua")
 
@@ -37,17 +39,17 @@ function sendData(temp,humi)
         header,
         body,
         function(code, data)
-            local timeout=5000 --default timeout 5 seconds before trying
+            tmr.stop(1) --Stop any running timer
             if (code < 0) then
                 print("HTTP request failed")
             else
                 print(code, data)
                 if (code == 200 and data == "OK") then
-                    timeout=SLEEP_TIME
+                    counter=counter+1
                     print("disconnected, timeout for "..(SLEEP_TIME/1000).." seconds")
+                    node.dsleep(SLEEP_TIME*1000)
                 end
             end
-            tmr.alarm(1,timeout,tmr.ALARM_SINGLE,function() connectWifi() end)
         end)
 end
 
@@ -62,8 +64,5 @@ function execLoop()
     end
 end
 
-function connectWifi()
-    tmr.alarm(1,500,tmr.ALARM_AUTO,function() execLoop() end)
-end
-
-connectWifi()
+tmr.alarm(1,500,tmr.ALARM_AUTO,function() execLoop() end)
+print("Check wifi and read sensor in 500ms...")
