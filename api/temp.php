@@ -5,7 +5,7 @@ $headerApiKey = $_SERVER['HTTP_X_API_KEY'];
 if (empty($_POST['id']) ||
     empty($_POST['t']) ||
     empty($_POST['h']) ||
-    $headerApiKey !== 'bfA6rW7rZRp1o6gA') {
+    $headerApiKey !== 'XXXX') {
   die();
 }
 
@@ -21,8 +21,8 @@ $database = new Medoo([
   'database_type' => 'mysql',
   'database_name' => 'ffxiatla_temp_sensor',
   'server' => 'localhost',
-  'username' => 'ffxiatla_temp_sensor',
-  'password' => 'Temp!Sensor'
+  'username' => 'XXXX',
+  'password' => 'XXXX'
 ]);
 
 $database->insert('temperature', [
