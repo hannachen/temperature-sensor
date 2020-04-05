@@ -4,6 +4,7 @@
 ## Setup
 - On the ESP-01, use a jumper wire to connect **GPIO0** and **GND** to enable **flash mode**
 - Create a custom build of [NodeMCU 1.5.4.1-final](https://nodemcu-build.com/), with the following modules: **DHT, file, GPIO, HTTP, net, node, timer, UART, WiFi**
+- Install [nodemcu v1.0 driver](https://cityos-air.readme.io/docs/1-mac-os-usb-drivers-for-nodemcu#section-13-nodemcu-v10-driver)
 - Flash the ESP-01 wifi module with custom built firmware (float version) using [esptool](https://github.com/espressif/esptool)
 - Download ESP8266 / NodeMCU / MicroPhython IDE [ESPlorer](https://github.com/4refr0nt/ESPlorer)
 - Open **ESPlorer**, switch to **NodeMCU+MicroPython** tab
